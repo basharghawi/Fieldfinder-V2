@@ -1,0 +1,9 @@
+.more-fields {
+  &::after {
+    content: '';
+    background: url('../../../assets/images/png/icons8-right-arrow-62.png') no-repeat;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+  }
+}

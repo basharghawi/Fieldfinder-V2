@@ -1,0 +1,71 @@
+<main class="homepage">
+  <section class="relative h-[700px]">
+    <div [ngClass]="{'opacity-100': i === currentIndex}" *ngFor="let image of images; let i = index" class="absolute w-full h-full -z-30 opacity-0 transition-opacity duration-1000 ease-in-out">
+      <img [src]="image.url" [alt]="image.alt" title="Field name">
+    </div>
+    <div class="linear-layer absolute w-full h-full -z-20"></div>
+    <div class="shape-layer absolute w-1/2 h-full -z-10"></div>
+    <div class="container">
+      <div class="grid grid-cols-12 -m-3">
+        <div class="col-span-12 lg:col-span-5 px-3">
+          <h1 class="text-5xl leading-snug text-gray-dark font-bold mb-14 pt-16">
+            The premier platform for individuals and teams to rent football fields
+          </h1>
+          <form (ngSubmit)="searchFields(getFieldForm)" [formGroup]="getFieldForm">
+            <div class="search-field">
+              <fieldset class="form-group">
+                <input formControlName="searchText" type="search" placeholder="search for fields">
+              </fieldset>
+              <div class="search-btn">
+                <button [disabled]="getFieldForm.invalid" type="submit">
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="pages-links">
+            <a routerLink="/fields-list" class="flex items-center gap-2 mt-7 w-fit">
+              <div class="rotate-90 w-8 h-8 mt-[-2px]">
+                <img src="../../assets/images/png/icons8-football-field-62.png" alt="field">
+              </div>
+              <div class="font-medium text-primary md:text-lg">All fields</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="mt-16">
+    <div class="container">
+      <div class="text-xl leading-relaxed text-gray-dark">
+        <p class="mb-5">
+          Welcome to FieldFinder, the premier platform for renting football fields. We are passionate about bringing together football enthusiasts and field owners, making it easy to find and secure a field for games and practices.
+        </p>
+        <p class="mb-5">
+          Our mission is to provide a convenient and accessible solution for those in need of a football field, whether it's for a pickup game with friends or a competitive league. We strive to make the rental process simple and seamless, from searching for a field to booking and paying for it online.
+        </p>
+        <p class="mb-5">
+          We understand the importance of safe, well-maintained playing fields, which is why we only list top-quality fields that meet our strict standards. Our team is dedicated to providing exceptional customer service, ensuring that every user has a positive experience with us.
+        </p>
+        <p>
+          Thank you for choosing FieldsFinder. We look forward to serving you and making your football dreams a reality.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="container mt-16">
+    <h3 class="text-2xl font-bold text-gray-dark mb-7">
+      Football field rentals
+    </h3>
+    <div class="cards-view">
+      <div class="grid grid-cols-12 -m-3">
+        <div *ngFor="let field of allFields$ | async" class="col-span-12 lg:col-span-6 xl:col-span-3 px-3">
+          <field-card [fieldData]="field"></field-card>
+        </div>
+      </div>
+    </div>
+    <a routerLink="/fields" class="flex items-center justify-end gap-1 mt-6 text-lg text-gray-text more-fields w-fit ml-auto">
+      more fields
+    </a>
+  </section>
+</main>

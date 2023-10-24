@@ -1,0 +1,43 @@
+<header class="bg-bg-2">
+  <div class="container">
+    <nav class="flex items-center justify-between py-4 lg:py-6">
+      <a routerLink="/">
+        <div class="w-[170px] md:w-[260px]">
+          <img src="../../../../assets/images/png/fieldfinder-logo.png" alt="FieldFinder">
+        </div>
+      </a>
+      <div class="md:hidden w-8 h-8">
+        <svg class="hb" viewBox="0 0 10 10" stroke="#2f2f2f" stroke-width=".8" fill="rgba(0,0,0,0)" stroke-linecap="round" style="cursor: pointer">
+          <path d="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7">
+            <animate dur="0.2s" attributeName="d" values="M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7;M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7" fill="freeze" begin="start.begin" />
+            <animate dur="0.2s" attributeName="d" values="M3,3L5,5L7,3M5,5L5,5M3,7L5,5L7,7;M2,3L5,3L8,3M2,5L8,5M2,7L5,7L8,7" fill="freeze" begin="reverse.begin" />
+          </path>
+          <rect width="20" height="20" stroke="none">
+            <animate dur="2s" id="reverse" attributeName="width" begin="click" />
+          </rect>
+          <rect width="20" height="20" stroke="none">
+            <animate dur="0.001s" id="start" attributeName="width" values="10;0" fill="freeze" begin="click" />
+            <animate dur="0.001s" attributeName="width" values="0;10" fill="freeze" begin="reverse.begin" />
+          </rect>
+        </svg>
+      </div>
+      <ul class="hidden md:flex items-center gap-7">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Error">Error*</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/fields">Fields</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item bg-primary px-2 pt-2 pb-[6px] rounded-md">
+          <a class="text-white" routerLink="/login">Login</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
