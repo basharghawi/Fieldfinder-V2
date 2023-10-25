@@ -24,7 +24,7 @@
             </div>
           </form>
           <div class="pages-links">
-            <a routerLink="/fields-list" class="flex items-center gap-2 mt-7 w-fit">
+            <a routerLink="/fields" class="flex items-center gap-2 mt-7 w-fit">
               <div class="rotate-90 w-8 h-8 mt-[-2px]">
                 <img src="../../assets/images/png/icons8-football-field-62.png" alt="field">
               </div>
@@ -58,8 +58,8 @@
       Football field rentals
     </h3>
     <div class="cards-view">
-      <div class="grid grid-cols-12 -m-3">
-        <div *ngFor="let field of allFields$ | async" class="col-span-12 lg:col-span-6 xl:col-span-3 px-3">
+      <div class="grid grid-cols-12">
+        <div *ngFor="let field of allFields$ | async" class="col-span-12 lg:col-span-6 xl:col-span-3 gap-6">
           <field-card [fieldData]="field"></field-card>
         </div>
       </div>

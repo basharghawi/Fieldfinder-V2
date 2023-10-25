@@ -17,10 +17,11 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   addAuthToken(request: HttpRequest<any>) {
+    const token = localStorage.getItem('accessToken');
     return request.clone({
       setHeaders: {
         "Accept-Language": sessionStorage.getItem('language') || 'en',
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        Authorization: `Bearer ${token}`,
         "X-Tenant": 'azhar'
       }
     })

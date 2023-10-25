@@ -109,6 +109,15 @@ img {
   }
 }
 
+.auth-group {
+  &:not(:last-child) {
+    @apply mb-5
+  }
+  input {
+    @apply w-full py-3 px-4 rounded-md border-gray-light
+  }
+}
+
 ///////////////////////////////////////
 @import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */

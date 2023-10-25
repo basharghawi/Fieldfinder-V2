@@ -1,1 +1,19 @@
-<p>auth works!</p>
+<div class="container mt-16">
+  <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm)"
+    class="bg-bg-2 rounded-md p-5 mx-auto text-center w-[80%] lg:w-[50%]">
+    <h1 class="text-3xl font-bold text-gray-dark mb-10">{{ title }}</h1>
+    <fieldset class="auth-group">
+      <input formControlName="email" type="email" placeholder="Email">
+    </fieldset>
+    <fieldset class="auth-group">
+      <input formControlName="password" type="password" placeholder="Password">
+    </fieldset>
+    <fieldset class="auth-group" *ngIf="authType === 'register'">
+      <input formControlName="phone" type="number" placeholder="Mobile Number">
+    </fieldset>
+    <fieldset class="auth-group" *ngIf="authType === 'register'">
+      <input formControlName="name" type="text" placeholder="Name">
+    </fieldset>
+    <button type="submit">submit</button>
+  </form>
+</div>
