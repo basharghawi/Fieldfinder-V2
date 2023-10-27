@@ -1,19 +1,95 @@
 <div class="container mt-16">
-  <form [formGroup]="authForm" (ngSubmit)="submitForm(authForm)"
-    class="bg-bg-2 rounded-md p-5 mx-auto text-center w-[80%] lg:w-[50%]">
-    <h1 class="text-3xl font-bold text-gray-dark mb-10">{{ title }}</h1>
+  <form
+    [formGroup]="authForm"
+    (ngSubmit)="submitForm(authForm)"
+    class="bg-bg-2 rounded-md p-5 mx-auto w-[80%] lg:w-[40%]"
+  >
+    <h1 class="text-3xl font-bold text-gray-dark text-center mb-10">
+      {{ title }}
+    </h1>
     <fieldset class="auth-group">
-      <input formControlName="email" type="email" placeholder="Email">
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="Email"
+        id="email"
+      />
+      <label
+        *ngIf="
+          authForm.get('email')?.errors !== null &&
+          authForm.get('email')?.touched
+        "
+        for="email"
+        >invalid email</label
+      >
     </fieldset>
     <fieldset class="auth-group">
-      <input formControlName="password" type="password" placeholder="Password">
+      <input
+        formControlName="password"
+        type="password"
+        placeholder="Password"
+        id="password"
+      />
+      <label
+        *ngIf="
+          authForm.get('password')?.errors !== null &&
+          authForm.get('password')?.touched
+        "
+        for="password"
+        >Password is required</label
+      >
     </fieldset>
     <fieldset class="auth-group" *ngIf="authType === 'register'">
-      <input formControlName="phone" type="number" placeholder="Mobile Number">
+      <input
+        formControlName="phone"
+        type="text"
+        placeholder="Mobile Number"
+        id="phone"
+        maxlength="10"
+      />
+      <label
+        *ngIf="
+          authForm.get('phone')?.errors !== null &&
+          authForm.get('phone')?.touched
+        "
+        for="phone"
+        >Mobile number is required</label
+      >
     </fieldset>
     <fieldset class="auth-group" *ngIf="authType === 'register'">
-      <input formControlName="name" type="text" placeholder="Name">
+      <input formControlName="name" type="text" placeholder="Name" id="name" />
+      <label
+        *ngIf="
+          authForm.get('name')?.errors !== null && authForm.get('name')?.touched
+        "
+        for="name"
+        >Name is required</label
+      >
     </fieldset>
-    <button type="submit">submit</button>
+    <button
+      class="bg-primary py-1 px-5 rounded-md text-bg-2 mt-6 disabled:bg-primary-light block mx-auto"
+      [disabled]="authForm.invalid"
+      type="submit"
+    >
+      {{ title }}
+    </button>
+    <p class="text-center pt-5 mt-5 border-t border-solid border-gray-light">
+      <span *ngIf="authType === 'login'"
+        >Need an account?
+        <a
+          [routerLink]="['/register']"
+          class="underline ml-1 text-gray-dark hover:text-primary"
+          >Sign up</a
+        ></span
+      >
+      <span *ngIf="authType === 'register'"
+        >Have an account?
+        <a
+          [routerLink]="['/login']"
+          class="underline ml-1 text-gray-dark hover:text-primary"
+          >Sign in</a
+        ></span
+      >
+    </p>
   </form>
 </div>

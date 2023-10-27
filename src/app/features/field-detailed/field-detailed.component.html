@@ -1,1 +1,62 @@
-<p>field-detailed works!</p>
+<main class="container">
+  <ng-container *ngIf="fieldData$ | async as field">
+    <section class="mb-14">
+      <figure class="h-[275px] md:h-[450px]">
+        <img [src]="field.image" [alt]="field.name" [title]="field.name">
+      </figure>
+    </section>
+    <section class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-7">
+        <article class="mb-10">
+          <h1 class="text-4xl font-bold text-gray-text mb-1">
+            {{field.name}}
+          </h1>
+          <p class="text-lg text-gray-text mb-4">
+            {{field.cityName}}
+          </p>
+          <h3 class="text-xl font-bold text-gray-text mb-1">
+            About 
+          </h3>
+          <p class="text-lg text-gray-text">
+            {{field.description}}
+          </p>
+          <p class="text-lg text-gray-text mb-4">
+            {{field.email}}, {{field.phoneNumber}}
+          </p>
+          <h3 class="text-xl font-bold text-gray-text mb-1">
+            Pricing 
+          </h3>
+          <p class="text-lg text-primary">
+            {{field.price}}JD / {{field.reservationPeriod}}
+          </p>
+        </article>
+        <!-- <figure class="border border-solid border-gray-light rounded-md overflow-hidden min-h-[300px] md:min-h-[500px]">
+          <div class="map-wrapper w-full h-[300px] md:h-[577px]">
+            <iframe [src]="sanitize(field.mapLocation)"
+                width="100%" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          </div>
+        </figure> -->
+      </div>
+      <aside class="col-span-12 lg:col-span-5 mt-8 lg:mt-0">
+        <div class="flex items-center justify-center gap-4 mb-1">
+          <div class="flex items-center gap-1">
+            <div class="w-5 h-5 rounded-full bg-gray-light border-[6px] border-bg-3"></div>
+            <p class="text-gray-text">Unavailable</p>
+          </div>
+          <div class="flex items-center gap-1">
+            <div class="w-5 h-5 rounded-full bg-gray-text border-[6px] border-primary-light2"></div>
+            <p class="text-gray-text">Available</p>
+          </div>
+          <div class="flex items-center gap-1">
+            <div class="w-5 h-5 rounded-full bg-transparent border-[6px] border-primary"></div>
+            <p class="text-gray-text">Selected</p>
+          </div>
+        </div>
+        <div class="bg-bg-2 border border-gray-light rounded-md py-5 px-4 lg:px-7 shadow-lg shadow-[rgba(0, 0, 0, 0.1)]">
+          
+        </div>
+      </aside>
+    </section>
+  </ng-container>
+</main>

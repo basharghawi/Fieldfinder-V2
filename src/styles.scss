@@ -102,19 +102,23 @@ img {
       font-size: 18px;
       line-height: 110%;
       color: white;
-      // &:disabled {
-      //   background-color: rgba(1, 126, 16, 0.4);
-      // }
     }
   }
 }
 
 .auth-group {
-  &:not(:last-child) {
-    @apply mb-5
-  }
+  @apply mb-5;
   input {
-    @apply w-full py-3 px-4 rounded-md border-gray-light
+    @apply w-full py-3 px-4 rounded-md border-gray-light;
+    &.ng-invalid.ng-touched {
+      @apply text-primary-red;
+      &::placeholder {
+        @apply text-primary-red;
+      }
+    }
+  }
+  label {
+    @apply block text-sm text-primary-red mt-1
   }
 }
 

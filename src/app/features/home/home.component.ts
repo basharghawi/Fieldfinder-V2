@@ -5,18 +5,20 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../../core/services/api.service';
 import { FieldCardComponent } from '@shared/field-card/field-card.component';
 import { RouterLink } from '@angular/router';
+import { ErrorCardComponent } from '@shared/field-card/error-card.component';
 
 
 @Component({
   selector: 'home-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, FieldCardComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, FieldCardComponent, ErrorCardComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
   destroy$ = new Subject<void>();
   searchedField = '';
+  
   
   constructor(private _ApiService: ApiService) {}
 
@@ -25,14 +27,15 @@ export class HomeComponent {
   })
   searchFields(formInfo: FormGroup) {
     this.searchedField = formInfo.value.searchText;
-    this._ApiService.getFields({ searchText: this.searchedField, pageNumber:1, rowsPerPage:4 }).subscribe((res) => {
+    this._ApiService.searchFields({ searchText: this.searchedField, pageNumber:1, rowsPerPage:4 }).subscribe((res) => {
       console.log(res);
     })
   }
 
-  allFields$ = this._ApiService.getFields({pageNumber:1,rowsPerPage:4}).pipe(map(
-    data => data.result.fields.items
-  ))
+  allFields$ = this._ApiService.getFields()
+    .pipe(map(
+      (data) => data.result.slice(0, 4)
+    ))
   
   // For Banner
   images = [

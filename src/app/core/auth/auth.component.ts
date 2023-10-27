@@ -33,7 +33,7 @@ export class AuthComponent {
   ) {
     this.authForm = new FormGroup<AuthForm>({
       email: new FormControl("", {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.email],
         nonNullable: true,
       }),
       password: new FormControl("", {
@@ -41,15 +41,6 @@ export class AuthComponent {
         nonNullable: true,
       }),
     });
-  }
-
-  submitForm(formData: FormGroup) {
-    this.UserService.login(formData.value)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (res) => console.log('success', res),
-        error: (err) => console.error('failed', err),
-      })
   }
 
   ngOnInit(): void {
@@ -66,7 +57,7 @@ export class AuthComponent {
       this.authForm.addControl(
         "phone",
         new FormControl("", {
-          validators: [Validators.required],
+          validators: [Validators.required, Validators.minLength(10)],
           nonNullable: true,
         })
       );
@@ -76,5 +67,17 @@ export class AuthComponent {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  submitForm(formData: FormGroup) {
+    let observable = this.authType === 'login'
+      ? this.UserService.login(formData.value)
+      : this.UserService.signUp(formData.value)
+
+    observable.pipe(takeUntil(this.destroy$))
+    .subscribe({
+      next: () => void this.router.navigate(["/"]),
+      error: (err) => console.error('failed', err),
+    })
   }
 }

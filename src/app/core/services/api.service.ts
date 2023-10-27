@@ -10,7 +10,17 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getFields(fieldData: GetFields):Observable<any> {
-    return this.http.post('https://localhost:44389/api/Field/GetFields', fieldData);
+  getFields():Observable<any> {
+    return this.http.get('https://localhost:44389/api/Field/GetFields');
+  };
+
+  searchFields(fieldData: GetFields):Observable<any> {
+    return this.http.post('https://localhost:44389/api/Field/SearchFields', fieldData);
+  };
+
+  getFieldById(fieldId: string):Observable<any> {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('id', fieldId);
+    return this.http.get('https://localhost:44389/api/Field/GetField', { params: queryParams });
   };
 }
