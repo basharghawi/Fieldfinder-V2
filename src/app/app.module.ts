@@ -9,6 +9,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from '@core/interceptors/api.interceptor';
 import { RouterModule } from '@angular/router';
 import {routes} from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import {routes} from './app-routing.module';
     HeaderComponent,
     FooterComponent,
     HttpClientModule,
-    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'}),
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

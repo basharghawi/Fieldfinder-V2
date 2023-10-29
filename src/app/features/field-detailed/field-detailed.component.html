@@ -21,13 +21,13 @@
             {{field.description}}
           </p>
           <p class="text-lg text-gray-text mb-4">
-            {{field.email}}, {{field.phoneNumber}}
+            <a [href]="'mailto:'+field.email">{{field.email}}</a>, {{field.phoneNumber}}
           </p>
           <h3 class="text-xl font-bold text-gray-text mb-1">
             Pricing 
           </h3>
           <p class="text-lg text-primary">
-            {{field.price}}JD / {{field.reservationPeriod}}
+            {{field.price}}JD / {{field.reservationPeriod}} hour
           </p>
         </article>
         <!-- <figure class="border border-solid border-gray-light rounded-md overflow-hidden min-h-[300px] md:min-h-[500px]">
@@ -54,7 +54,38 @@
           </div>
         </div>
         <div class="bg-bg-2 border border-gray-light rounded-md py-5 px-4 lg:px-7 shadow-lg shadow-[rgba(0, 0, 0, 0.1)]">
-          
+          <mat-calendar (selectedChange)="onDateChange($event)" [maxDate]="maxDate" [minDate]="minDate" [(selected)]="selected"></mat-calendar>
+          <ng-container *ngIf="reservationTimes.length > 0">
+            <div class="pt-5 border-t border-gray-light">
+              <h3 class="text-gray-text font-bold mb-5">Select time</h3>
+              <div class="grid grid-cols-2 gap-x-2 gap-y-2 mb-7">
+                <div class="time-slot"
+                *ngFor="let time of reservationTimes; let i = index"
+                [ngClass]="{
+                  'hidden': pastClass(time.fromTime), 'bg-bg-3 select-none pointer-events-none cursor-default': time.isReserved, 'bg-primary': selectedButton === i
+                }"
+                (click)="selectButton(i, time.fromTime, time.toTime)"
+                >
+                  <span class="text-xs text-gray-text w-max">{{time.fromTime}}</span>
+                   - 
+                  <span class="text-xs text-gray-text w-max">{{time.toTime}}</span>
+                </div>
+              </div>
+              <button class="block mx-auto rounded-md bg-primary text-white py-1 px-5 disabled:bg-primary-light"
+              [disabled]="selectedButton === null"
+              (click)="toBooking(field.id, field.name)"
+              >
+                Confirm</button>
+            </div>
+            <p class="text-center text-white bg-primary-red py-2 px-2 rounded-md w-fit mt-4 mx-auto"
+            *ngIf="reservationError" 
+            >
+              Please login to continue
+            </p>
+          </ng-container>
+          <p *ngIf="holidayShow" class="text-lg text-gray-dark font-medium text-center mb-2">
+            No times available for this day
+          </p>
         </div>
       </aside>
     </section>

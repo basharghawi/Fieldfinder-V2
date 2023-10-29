@@ -1,3 +1,38 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core;
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$fieldfinderV2-primary: mat.define-palette(mat.$indigo-palette);
+$fieldfinderV2-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$fieldfinderV2-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$fieldfinderV2-theme: mat.define-light-theme((
+  color: (
+    primary: $fieldfinderV2-primary,
+    accent: $fieldfinderV2-accent,
+    warn: $fieldfinderV2-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($fieldfinderV2-theme);
+
 @import 'tailwindcss/base';
 body {
   font-family: 'Josefin Sans', sans-serif;
@@ -119,6 +154,15 @@ img {
   }
   label {
     @apply block text-sm text-primary-red mt-1
+  }
+}
+
+.time-slot {
+  @apply col-span-1 py-2 px-1 bg-primary-light rounded-md flex justify-center items-center gap-1 cursor-pointer select-none transition-all duration-300;
+  &.bg-primary {
+    span {
+      @apply text-white;
+    }
   }
 }
 

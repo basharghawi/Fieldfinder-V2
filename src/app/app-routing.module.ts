@@ -36,6 +36,10 @@ export const routes: Routes = [
   {
     path: 'register',
     loadComponent: () => import('./core/auth/auth.component').then((m) => m.AuthComponent),
+  },
+  {
+    path: 'booking',
+    loadComponent: () => import('./features/booking/booking.component').then((m) => m.BookingComponent),
   }
 ];
 
