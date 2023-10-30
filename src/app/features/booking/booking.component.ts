@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { ApiService } from '@core/services/api.service';
 import { Subject, map, switchMap, takeUntil } from 'rxjs';
@@ -7,7 +7,7 @@ import { Field } from '@core/models/field-data';
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [NgIf, AsyncPipe, RouterLink],
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.scss']
 })

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Subject, interval, map, takeUntil } from 'rxjs';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
@@ -11,7 +11,7 @@ import { ErrorCardComponent } from '@shared/field-card/error-card.component';
 @Component({
   selector: 'home-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, FieldCardComponent, ErrorCardComponent],
+  imports: [NgIf, NgFor, AsyncPipe, NgClass, ReactiveFormsModule, RouterLink, FieldCardComponent, ErrorCardComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

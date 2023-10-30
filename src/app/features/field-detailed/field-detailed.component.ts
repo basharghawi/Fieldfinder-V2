@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule, formatDate } from '@angular/common';
+import { AsyncPipe, NgClass, NgFor, NgIf, formatDate } from '@angular/common';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ApiService } from '@core/services/api.service';
@@ -14,7 +14,7 @@ import { Times } from '@core/models/field-times'
 @Component({
   selector: 'field-page',
   standalone: true,
-  imports: [CommonModule, MatDatepickerModule, MatNativeDateModule, RouterLink],
+  imports: [NgIf, NgFor, NgClass, AsyncPipe, MatDatepickerModule, MatNativeDateModule, RouterLink],
   templateUrl: './field-detailed.component.html',
   styleUrls: ['./field-detailed.component.scss']
 })

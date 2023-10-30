@@ -1,13 +1,11 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'search-input',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class SearchInputComponent {
 
