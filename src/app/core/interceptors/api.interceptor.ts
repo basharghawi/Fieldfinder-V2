@@ -17,7 +17,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   addAuthToken(request: HttpRequest<any>) {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('jwtToken');
     return request.clone({
       setHeaders: {
         "Accept-Language": sessionStorage.getItem('language') || 'en',

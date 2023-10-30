@@ -1,25 +1,60 @@
-<main class="container mt-[100px]">
-  <h1 class="text-3xl lg:text-5xl font-bold text-gray-dark text-center mb-10 lg:mb-16">
-    Request to book</h1>
-  <div class="grid grid-cols-12 gap-6">
-    <div class="col-span-12 lg:col-span-5 bg-bg-2 rounded-md p-5 mb-7 lg:mb-0">
-      <div class="flex items-start gap-3 pb-5 mb-5 border border-gray-light">
-        <figure class="basis-full md:basis-[143px] md:mb-5">
-          <img [src]="" [alt]=""
-          class="rounded-md"
+<ng-container *ngIf="bookingQ$ | async as data">
+  <main class="container mt-[100px]" *ngIf="fieldBooked$ | async as field">
+    <h1 class="text-3xl lg:text-5xl font-bold text-gray-dark text-center mb-10 lg:mb-16">
+      Request to book</h1>
+      <div class="bg-bg-2 rounded-md p-5 mb-7 mx-auto lg:mb-0 w-[80%] lg:w-[50%]">
+        <div class="flex items-start gap-3 pb-5 mb-5 border-b border-gray-light">
+          <figure class="basis-full md:basis-[143px] md:mb-5">
+            <img [src]="field.image" [alt]="field.name"
+            class="rounded-md"
+            >
+          </figure>
+          <figcaption>
+            <h3 class="text-gray-dark">{{field.name}}</h3>
+            <p class="text-gray-text mb-2 pb-2 border-b border-gray-light">
+              {{field.cityName}}, Jordan
+            </p>
+            <p class="text-gray-text text-sm">
+              <span class="mr-1">Date:</span> <span>{{data['date']}}</span>
+            </p>
+            <p class="text-gray-text text-sm">
+              <span class="mr-1">Time:</span> <span> {{data['startTime']}} </span> - <span> {{data['endTime']}} </span>
+            </p>
+          </figcaption>
+        </div>
+        <div class="pb-5 mb-5 border-b border-gray-light">
+          <h3 class="text-gray-dark font-medium mb-6">Price details</h3>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-sm text-gray-text">Field booking price</span>
+            <span class="text-sm text-gray-text"> {{field.price}} JD</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-text">Service fee</span>
+            <span class="text-sm text-gray-text">1 JD</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-text">Total</span>
+          <span class="text-sm text-gray-text"> {{field.price + 1}} JD</span>
+        </div>
+        <button class="block mx-auto bg-primary py-2 px-4 text-bg-2 rounded-md mt-7"
+        (click)="sendBooking(data)"
+        >
+          Book
+        </button>
+        <dialog class="py-8 px-16 text-center rounded-md min-w-[300px]" id="my_dialog">
+          <p class="text-lg text-gray-dark mb-5">
+            Booking Confirmed
+          </p>
+          <p class="text-lg text-gray-dark mb-5">
+            An email will be sent with the confirmation
+          </p>
+          <button class="py-2 px-5 bg-primary rounded-md"
+          [routerLink]="['/field', field.id]"
           >
-        </figure>
-        <figcaption>
-          <h3 class="text-gray-dark"></h3>
-          <p class="text-gray-text"></p>
-          <p class="text-gray-text">
-            <span class="mr-1">Date:</span> <span></span>
-          </p>
-          <p class="text-gray-text">
-            <span class="mr-1">Time:</span> <span></span> - <span></span>
-          </p>
-        </figcaption>
+            👍
+          </button>
+        </dialog>
       </div>
-    </div>
-  </div>
-</main>
+  </main>
+</ng-container>
