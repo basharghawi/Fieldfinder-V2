@@ -28,4 +28,8 @@ export class ApiService {
   CreateReservation(reservation: CreateReservation):Observable<any> {
     return this.http.post('https://localhost:44389/api/Field/CreateReservation', reservation);
   };
+
+  getCities():Observable<any> {
+    return this.http.get('https://localhost:44389/api/Site/GetCities');
+  };
 }

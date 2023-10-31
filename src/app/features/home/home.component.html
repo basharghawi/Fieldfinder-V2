@@ -12,9 +12,11 @@
             The premier platform for individuals and teams to rent football fields
           </h1>
           <form (ngSubmit)="searchFields(getFieldForm)" [formGroup]="getFieldForm">
-            <div class="search-field">
+            <div class="search-field w-fit">
               <fieldset class="form-group">
-                <input formControlName="searchText" type="search" placeholder="search for fields">
+                <input class="w-[180px] lg:w-[306px]"
+                formControlName="searchText" type="search" placeholder="search for fields"
+                >
               </fieldset>
               <div class="search-btn">
                 <button [disabled]="getFieldForm.invalid" type="submit">

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
+import { Fields } from '@core/models/fields';
 @Component({
   selector: 'field-card',
   standalone: true,
@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
 })
 export class FieldCardComponent {
 
-  @Input() fieldData: any;
+  @Input() fieldData: Fields | undefined;
 }

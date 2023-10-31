@@ -1,1 +1,70 @@
-<p>field-listing works!</p>
+<main class="container mt-24">
+  <h1 class="text-4xl text-gray-dark font-bold text-center mb-16">
+    Search for Available Football Fields
+  </h1>
+  <form class="lg:w-[45%] mb-9 mx-auto"
+    [formGroup]="getFieldForm"
+    (ngSubmit)="searchFields({searchText: getFieldForm.value.searchText, cityName: getFieldForm.value.cityName, rowsPerPage: 3, pageNumber: 1})"
+  >
+    <div class="flex items-center border border-primary rounded-md overflow-hidden">
+      <fieldset class="flex-grow flex-shrink-0 border-r border-primary">
+        <input class="py-4 px-4 border-0 bg-transparent text-sm lg:text-base text-gray-dark-2 font-medium w-full" 
+          formControlName="searchText" type="search" placeholder="Search For Fields"
+        >
+      </fieldset>
+      <fieldset *ngIf="cities$ | async as cities">
+        <select class="py-4 px-4 border-0 bg-transparent text-sm lg:text-base text-gray-dark-2 font-medium"
+          formControlName="cityName"
+        >
+          <option value="">Cities</option>
+          <ng-container *ngFor="let city of cities">
+            <option [value]="city.name">{{city.name}}</option>
+          </ng-container>
+        </select>
+      </fieldset>
+      <button class="py-4 px-5 text-sm lg:text-base text-white bg-primary" type="submit"
+        [disabled]="getFieldForm.invalid"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+  <ng-template #error>
+    <h3 class="text-lg text-gray-text font-bold">
+      Sorry, we couldn't find any results for the word you searched
+    </h3>
+  </ng-template>
+  <ng-container *ngIf="FieldsQueryed$ | async as fields">
+    <div class="grid grid-cols-12 gap-6">
+      <div *ngFor="let field of fields.items" class="col-span-12 md:col-span-6 lg:col-span-3">
+        <field-card [fieldData]="field"></field-card>
+      </div>
+    </div>
+    <ng-container *ngIf="fields.totalPages > 1">
+      <ul class="flex items-center justify-center gap-5 mt-7">
+        <button class="w-4 h-4 opacity-80 flex rotate-180 disabled:opacity-40"
+          (click)="searchFields({pageNumber: fields.currentPage - 1, rowsPerPage: 3})"
+          [disabled]="fields.currentPage === 1"
+        >
+          <img src="../../../assets/images/png/icons8-forward-50.png" alt="previous">
+        </button>
+        <ng-container *ngFor="let field of counter(fields.totalPages); let i = index">
+          <li class="py-3 px-4 w-12 h-12 rounded-xl cursor-pointer transition-all duration-300 bg-bg-2 text-gray-text hover:bg-primary hover:text-white"
+            [ngClass]="{'bg-primary text-white pointer-events-none': fields.currentPage === i + 1}"
+            (click)="searchFields({pageNumber: i + 1, rowsPerPage: 3})"
+          >
+            <p class="text-lg text-center">
+              {{i + 1}}
+            </p>
+          </li>
+        </ng-container>
+        <button class="w-4 h-4 opacity-80 flex disabled:opacity-40"
+          (click)="searchFields({pageNumber: fields.currentPage + 1, rowsPerPage: 3})"
+          [disabled]="fields.currentPage === fields.totalPages"
+        >
+          <img src="../../../assets/images/png/icons8-forward-50.png" alt="next">
+        </button>
+      </ul>
+    </ng-container>
+  </ng-container>
+</main>

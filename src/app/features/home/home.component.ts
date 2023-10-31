@@ -4,7 +4,7 @@ import { Subject, interval, map, takeUntil } from 'rxjs';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
 import { FieldCardComponent } from '@shared/field-card/field-card.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ErrorCardComponent } from '@shared/field-card/error-card.component';
 
 
@@ -17,19 +17,18 @@ import { ErrorCardComponent } from '@shared/field-card/error-card.component';
 })
 export class HomeComponent {
   destroy$ = new Subject<void>();
-  searchedField = '';
   
   
-  constructor(private _ApiService: ApiService) {}
+  constructor(
+    private _ApiService: ApiService,
+    private router: Router
+  ) {}
 
   getFieldForm:FormGroup = new FormGroup({
     searchText: new FormControl(null, [Validators.required, Validators.minLength(1)]),
   })
   searchFields(formInfo: FormGroup) {
-    this.searchedField = formInfo.value.searchText;
-    this._ApiService.searchFields({ searchText: this.searchedField, pageNumber:1, rowsPerPage:4 }).subscribe((res) => {
-      console.log(res);
-    })
+    this.router.navigate(['/fields'], { queryParams: { search: formInfo.value.searchText } })
   }
 
   allFields$ = this._ApiService.getFields()
