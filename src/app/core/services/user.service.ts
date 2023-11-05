@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
-import { JwtService } from './jwt.service';
+import { BehaviorSubject, Observable, distinctUntilChanged, map, tap } from 'rxjs';
 import { Router } from "@angular/router";
+import { JwtService } from './jwt.service';
+import { Token } from '@core/models/token';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,18 @@ export class UserService {
     private http: HttpClient, 
     private jwtService: JwtService,
     private router: Router
-  ) { }
-  currentUser = new BehaviorSubject(null);
+  ) { 
+    if (window.localStorage["jwtToken"] != null) {
+      this.currentUserSubject.next(this.jwtService.decodeToken());
+      // console.log(this.jwtService.decodeToken());
+    }
+  }
+
+  private currentUserSubject = new BehaviorSubject<Token | null>(null);
+  public currentUser = this.currentUserSubject.asObservable()
+    .pipe(distinctUntilChanged());
+
+  public isAuthenticated = this.currentUser.pipe(map((user) => !!user));
 
   signUp(credentials: {
     email: string,
@@ -22,7 +34,7 @@ export class UserService {
     phone: string,
     name: string
   }):Observable<any> {
-    return this.http.post('https://localhost:44389/api/Account/Register', credentials);
+    return this.http.post(`${environment.apiUrl}/Account/Register`, credentials);
   };
 
   login(credentials: {
@@ -30,7 +42,7 @@ export class UserService {
     password: string
   }):Observable<any> {
     return this.http
-      .post('https://localhost:44389/api/Account/Login', credentials)
+      .post(`${environment.apiUrl}/Account/Login`, credentials)
       .pipe(tap((user) => this.setAuth(user)));
   };
 
@@ -41,11 +53,11 @@ export class UserService {
 
   setAuth(user: any): void {
     this.jwtService.saveToken(user.result.authResponse.accessToken);
-    this.currentUser.next(user.result.authResponse.accessToken);
+    this.currentUserSubject.next(this.jwtService.decodeToken());
   }
 
   purgeAuth(): void {
     this.jwtService.destroyToken();
-    this.currentUser.next(null);
+    this.currentUserSubject.next(null);
   }
 }

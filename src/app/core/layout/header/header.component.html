@@ -28,15 +28,31 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/fields">Fields</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/admin">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-        </li>
-        <li class="nav-item bg-primary px-2 pt-2 pb-[6px] rounded-md">
-          <a class="text-white" routerLink="/login">Login</a>
-        </li>
+
+        <!-- Show this for logged out users -->
+        <ng-template #loggedout>
+          <li class="nav-item bg-primary px-2 pt-2 pb-[6px] rounded-md">
+            <a class="text-white" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item bg-primary px-2 pt-2 pb-[6px] rounded-md">
+            <a class="text-white" routerLink="/register">register</a>
+          </li>
+        </ng-template>
+
+        <!-- Show this for logged in users -->
+        <ng-container *ngIf="userRole$ | async as user; else loggedout">
+          <li class="nav-item" *ngIf="user.Role === 'Admin'">
+            <a class="nav-link" routerLink="/admin">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item bg-primary-red px-2 pt-2 pb-[6px] rounded-md cursor-pointer"
+          (click)="logout()"
+          >
+            <a class="text-white">Logout</a>
+          </li>
+        </ng-container>
       </ul>
     </nav>
   </div>

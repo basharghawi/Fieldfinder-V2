@@ -46,6 +46,10 @@ img {
   max-width: unset;
 }
 
+[type='search']:focus, select:focus {
+  @apply shadow-none border-primary ring-primary
+}
+
 ///////////////////////////////////////
 @import 'tailwindcss/components';
 .shape-layer {

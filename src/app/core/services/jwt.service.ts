@@ -8,10 +8,7 @@ export class JwtService {
   decodeToken() {
     const token = JSON.stringify(window.localStorage["jwtToken"]);
     const decodedToken: any = jwtDecode(token);
-    return {
-      role: decodedToken.Role,
-      useID: decodedToken.sub
-    };
+    return decodedToken;
   }
 
   getToken(): string {

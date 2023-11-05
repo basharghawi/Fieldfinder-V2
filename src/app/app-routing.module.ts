@@ -1,5 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from '@core/guards/auth.guard';
+import { UserService } from '@core/services/user.service';
+import { map } from 'rxjs';
 
 export const routes: Routes = [
   {
@@ -23,23 +26,34 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent)
+    loadComponent: () => import('./features/admin/admin.component').then((m) => m.AdminComponent),
+    canActivate: [authGuard]
   },
   {
     path: 'dashboard',
-    loadComponent: () => import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent)
+    loadComponent: () => import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+    canActivate: [authGuard]
   },
   {
     path: 'login',
-    loadComponent: () => import('./core/auth/auth.component').then((m) => m.AuthComponent)
+    loadComponent: () => import('./core/auth/auth.component').then((m) => m.AuthComponent),
+    title: 'Login',
+    canActivate: [
+      () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth))
+    ]
   },
   {
     path: 'register',
     loadComponent: () => import('./core/auth/auth.component').then((m) => m.AuthComponent),
+    title: 'Register',
+    canActivate: [
+      () => inject(UserService).isAuthenticated.pipe(map((isAuth) => !isAuth))
+    ]
   },
   {
     path: 'booking',
     loadComponent: () => import('./features/booking/booking.component').then((m) => m.BookingComponent),
+    canActivate: [authGuard]
   }
 ];
 

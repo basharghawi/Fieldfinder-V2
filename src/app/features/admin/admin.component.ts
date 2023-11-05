@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgIf],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })

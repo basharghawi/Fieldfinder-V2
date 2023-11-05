@@ -26,6 +26,8 @@ export class FieldDetailedComponent {
     private Sanitizer: DomSanitizer,
     private titleService: Title
   ) {
+    const date = new Date;
+    this.minDate = date;
     this.maxDate = this.date;
     this.maxDate.setDate(this.date.getDate() + 14);
   }
@@ -33,13 +35,13 @@ export class FieldDetailedComponent {
   date = new Date;
   selected: Date | null | undefined;
   selectedDate:any;
-  maxDate: any;
+  maxDate: Date | null | undefined;
+  minDate: Date;
 
   today: any = this.date.getDate();
   month: any = this.date.getMonth() + 1;
   year: any = this.date.getFullYear();
   timeH = this.date.getHours();
-  minDate = this.year + '-' + this.month + '-' + this.today;
 
   dateToday = '';
 
