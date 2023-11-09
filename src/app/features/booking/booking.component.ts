@@ -24,13 +24,13 @@ export class BookingComponent {
     this.destroy$.complete();
   }
 
-  bookingQ$ = this.route.queryParams.pipe(map((params) => params))
+  bookingQ$ = this.route.queryParams.pipe(map((params: Params) => params))
 
   fieldBooked$ = this.bookingQ$.pipe(switchMap(id => this._ApiService.getFieldById(id['id'])))
   .pipe(map((fieldData) => fieldData.result as Field))
 
   sendBooking(data: Params) {
-    let test = document.getElementById('my_dialog') as HTMLDialogElement;
+    let successDialog = document.getElementById('my_dialog') as HTMLDialogElement;
     this._ApiService.CreateReservation({
       fieldId: data['id'],
       date: data['date'],
@@ -41,7 +41,7 @@ export class BookingComponent {
     }).pipe(takeUntil(this.destroy$)).subscribe({
       next: (res) => {
         if (200 === res.statusCode) {
-          test.showModal();
+          successDialog.showModal();
         }
       },
       error: (err) => {

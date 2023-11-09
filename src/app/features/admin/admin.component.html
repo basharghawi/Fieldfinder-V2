@@ -1,1 +1,109 @@
-<p>admin works!</p>
+<main class="container mt-[100px]">
+  <h1 class="text-3xl lg:text-5xl font-bold text-gray-dark text-center mb-10 lg:mb-16">Admin</h1>
+  <div class="grid grid-cols-12 gap-6">
+    <aside class="col-span-4">
+      <div class="bg-primary rounded-md mb-10 py-4 px-3 lg:py-6 lg:px-4 flex items-start justify-between">
+        <div>
+          <h3 class="text-sm lg:text-lg text-bg-2 mb-3"></h3>
+          <h3 class="text-sm lg:text-lg text-bg-2 mb-3"></h3>
+          <h3 class="text-sm lg:text-lg text-bg-2"></h3>
+        </div>
+        <h3 class="text-primary-light3 select-none">Admin</h3>
+      </div>
+      <form class="bg-bg-2 rounded-md" [formGroup]="createForm" (ngSubmit)="submitField(createForm)">
+        <h3 class="text-xl lg:text-2xl text-gray-text font-bold text-center pt-5">Create Field</h3>
+        <div class="py-5 px-3 grid grid-cols-2 gap-4">
+          <fieldset class="col-span-1">
+            <input type="text" placeholder="Field name" formControlName="Name" name="Name"
+            class="field-input"
+            [ngClass]="{'border-primary-red': createForm.get('Name')?.errors !== null && createForm.get('Name')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <select class="field-input" formControlName="CityId" name="CityId"
+            [ngClass]="{'border-primary-red': createForm.get('CityId')?.errors !== null && createForm.get('CityId')?.touched}"
+            >
+              <option selected disabled value="">City</option>
+              <ng-container *ngFor="let city of cities$ | async">
+                <option [value]="city.id">{{city.name}}</option>
+              </ng-container>
+            </select>
+          </fieldset>
+          <fieldset class="col-span-2">
+            <textarea class="field-input resize-y" rows="1" placeholder="Description"
+             formControlName="Description" name="Description"
+             [ngClass]="{'border-primary-red': createForm.get('Description')?.errors !== null && createForm.get('Description')?.touched}"
+            ></textarea>
+          </fieldset>
+          <fieldset class="col-span-2">
+            <input type="text" placeholder="Map location" 
+            class="field-input"
+            formControlName="MapLocation" name="MapLocation"
+            [ngClass]="{'border-primary-red': createForm.get('MapLocation')?.errors !== null && createForm.get('MapLocation')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-2">
+            <input type="email" placeholder="Email"
+            class="field-input"
+            formControlName="Email" name="Email"
+            [ngClass]="{'border-primary-red': createForm.get('Email')?.errors !== null && createForm.get('Email')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="text" placeholder="Phone number"
+            class="field-input"
+            formControlName="PhoneNumber" name="PhoneNumber"
+            [ngClass]="{'border-primary-red': createForm.get('PhoneNumber')?.errors !== null && createForm.get('PhoneNumber')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="number" placeholder="Price"
+            class="field-input"
+            formControlName="Price" name="Price"
+            [ngClass]="{'border-primary-red': createForm.get('Price')?.errors !== null && createForm.get('Price')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="text" placeholder="Start time"
+            class="field-input"
+            formControlName="StartTime" name="StartTime"
+            [ngClass]="{'border-primary-red': createForm.get('StartTime')?.errors !== null && createForm.get('StartTime')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="text" placeholder="End time"
+            class="field-input"
+            formControlName="EndTime" name="EndTime"
+            [ngClass]="{'border-primary-red': createForm.get('EndTime')?.errors !== null && createForm.get('EndTime')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="number" placeholder="Reservation period" min="1"
+            class="field-input"
+            formControlName="ReservationPeriod" name="ReservationPeriod"
+            [ngClass]="{'border-primary-red': createForm.get('ReservationPeriod')?.errors !== null && createForm.get('ReservationPeriod')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-1">
+            <input type="text" placeholder="Excluded days"
+            class="field-input"
+            formControlName="ExcludedDays" name="ExcludedDays"
+            [ngClass]="{'border-primary-red': createForm.get('ExcludedDays')?.errors !== null && createForm.get('ExcludedDays')?.touched}"
+            >
+          </fieldset>
+          <fieldset class="col-span-2">
+            <input type="file" (change)="onFileSelected($event)"
+            class="field-input"
+            formControlName="Image" name="Image"
+            [ngClass]="{'border-primary-red': createForm.get('Image')?.errors !== null && createForm.get('Image')?.touched}"
+            >
+          </fieldset>
+          <button type="submit"
+          class="col-span-2 rounded-md py-2 px-7 bg-primary text-white disabled:bg-primary-light"
+          [disabled]="createForm.invalid"
+          >Submit</button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</main>
