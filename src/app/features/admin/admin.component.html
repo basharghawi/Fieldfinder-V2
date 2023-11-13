@@ -139,7 +139,7 @@
               <td class="table__th-td text-gray-dark"> {{field.price}} </td>
               <td class="table__th-td text-gray-dark">
                 <button class="border border-primary-red rounded-md text-primary-red py-1 px-3 select-none"
-                (click)="onDelete(field.id, field.name)"
+                (click)="openDialog(field.id, field.name)"
                 >
                   Delete
                 </button>
@@ -150,6 +150,22 @@
             </tr>
             <div class="mb-3"></div>
           </tbody>
+          <dialog class="py-8 px-16 bg-gray-dark text-center rounded-md min-w-[300px]" id="my_dialog">
+            <h4 class="text-lg text-gray-light mb-4">
+              Do you want to delete <br>
+              <b>{{fieldToDelete.name}}</b>?
+            </h4>
+            <button class="py-1 px-4 bg-bg-transparent hover:bg-primary rounded-md text-white"
+            (click)="onDelete(fieldToDelete.id, fieldToDelete.name)"
+            >
+              Yes
+            </button>
+            <button class="py-1 px-4 ml-4 bg-bg-transparent hover:bg-primary rounded-md text-white"
+            (click)="closeDialog()"
+            >
+              No
+            </button>
+          </dialog>
         </ng-container>
       </table>
     </div>

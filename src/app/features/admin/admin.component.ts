@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Subject, defer, map, shareReplay, switchMap, takeUntil } from 'rxjs';
 import { AdminService } from '@core/services/admin.service';
 import { ApiService } from '@core/services/api.service';
 import { Cities } from '@core/models/cities';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Searched } from '@core/models/search-result';
 import { GetFields } from '@core/models/get-fields';
-import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'admin',
@@ -24,7 +23,7 @@ export class AdminComponent {
     private _AdminService: AdminService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnDestroy(): void {
@@ -35,6 +34,21 @@ export class AdminComponent {
   destroy$ = new Subject<void>();
   selectedFile: any;
   showImg = false;
+  fieldToDelete = {
+    id: '',
+    name: ''
+  }
+
+  openDialog(id: string, name: string): void {
+    let confirmDialog = document.getElementById('my_dialog') as HTMLDialogElement;
+    this.fieldToDelete.name = name;
+    this.fieldToDelete.id = id;
+    confirmDialog.showModal();
+  }
+  closeDialog(): void {
+    let confirmDialog = document.getElementById('my_dialog') as HTMLDialogElement;
+    confirmDialog.close();
+  }
   
   cities$ = this._ApiService.getCities()
   .pipe(map((data) => data.result.cities as Cities[])).pipe(shareReplay())
@@ -78,9 +92,11 @@ export class AdminComponent {
   }
 
   onDelete(id: string, name: string) {
+    let confirmDialog = document.getElementById('my_dialog') as HTMLDialogElement;
+    confirmDialog.close();
     this._AdminService.deleteField(id).pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => this.notify(name, 'deleted successfully', '👍'),
+        next: () => this.notify(name, 'deleted successfully'),
         error: (err) => this.notify('', err.message, '💩')
       })
   }
@@ -99,8 +115,8 @@ export class AdminComponent {
 
     this._AdminService.createField(formData).pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: () => this.notify(formInfo.value.Name, 'created successfully', '👍'),
-        error: (err) => this.notify('', err.message, '💩')
+        next: () => this.notify(formInfo.value.Name, 'created successfully'),
+        error: (err) => this.notify('', err.message)
       });
   }
   
@@ -114,7 +130,7 @@ export class AdminComponent {
     }, 300);
   }
 
-  notify(name: string, mess: string, act: string) {
+  notify(name: string, mess: string, act?: string) {
     this.snackBar.open(`${name} ${mess}`, act, {
       horizontalPosition: 'right',
       verticalPosition: 'top',
