@@ -22,7 +22,7 @@ export class FieldListingComponent {
   ) {}
 
   getFieldForm:FormGroup = new FormGroup({
-    searchText: new FormControl('', Validators.required),
+    searchText: new FormControl(''),
     cityName: new FormControl('')
   })
   

@@ -1,5 +1,5 @@
-import { NgModule, inject } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
 import { UserService } from '@core/services/user.service';
 import { map } from 'rxjs';
@@ -56,9 +56,3 @@ export const routes: Routes = [
     canActivate: [authGuard]
   }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

@@ -17,6 +17,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   addAuthToken(request: HttpRequest<any>) {
+    // console.log('intercepted');
     const token = localStorage.getItem('jwtToken');
     return request.clone({
       setHeaders: {

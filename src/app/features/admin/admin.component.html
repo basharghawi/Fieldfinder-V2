@@ -14,15 +14,12 @@
         <h3 class="text-xl lg:text-2xl text-gray-text font-bold text-center pt-5">Create Field</h3>
         <div class="py-5 px-3 grid grid-cols-2 gap-4">
           <fieldset class="col-span-1">
-            <input type="text" placeholder="Field name" formControlName="Name" name="Name"
-            class="field-input"
-            [ngClass]="{'border-primary-red': createForm.get('Name')?.errors !== null && createForm.get('Name')?.touched}"
-            >
+            <input type="text" placeholder="Field name" formControlName="Name" name="Name" class="field-input"
+              [ngClass]="{'border-primary-red': createForm.get('Name')?.errors !== null && createForm.get('Name')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
             <select class="field-input" formControlName="CityId" name="CityId"
-            [ngClass]="{'border-primary-red': createForm.get('CityId')?.errors !== null && createForm.get('CityId')?.touched}"
-            >
+              [ngClass]="{'border-primary-red': createForm.get('CityId')?.errors !== null && createForm.get('CityId')?.touched}">
               <option selected disabled value="">City</option>
               <ng-container *ngFor="let city of cities$ | async">
                 <option [value]="city.id">{{city.name}}</option>
@@ -30,80 +27,131 @@
             </select>
           </fieldset>
           <fieldset class="col-span-2">
-            <textarea class="field-input resize-y" rows="1" placeholder="Description"
-             formControlName="Description" name="Description"
-             [ngClass]="{'border-primary-red': createForm.get('Description')?.errors !== null && createForm.get('Description')?.touched}"
-            ></textarea>
+            <textarea class="field-input resize-y" rows="1" placeholder="Description" formControlName="Description"
+              name="Description"
+              [ngClass]="{'border-primary-red': createForm.get('Description')?.errors !== null && createForm.get('Description')?.touched}"></textarea>
           </fieldset>
           <fieldset class="col-span-2">
-            <input type="text" placeholder="Map location" 
-            class="field-input"
-            formControlName="MapLocation" name="MapLocation"
-            [ngClass]="{'border-primary-red': createForm.get('MapLocation')?.errors !== null && createForm.get('MapLocation')?.touched}"
-            >
+            <input type="text" placeholder="Map location" class="field-input" formControlName="MapLocation"
+              name="MapLocation"
+              [ngClass]="{'border-primary-red': createForm.get('MapLocation')?.errors !== null && createForm.get('MapLocation')?.touched}">
           </fieldset>
           <fieldset class="col-span-2">
-            <input type="email" placeholder="Email"
-            class="field-input"
-            formControlName="Email" name="Email"
-            [ngClass]="{'border-primary-red': createForm.get('Email')?.errors !== null && createForm.get('Email')?.touched}"
-            >
+            <input type="email" placeholder="Email" class="field-input" formControlName="Email" name="Email"
+              [ngClass]="{'border-primary-red': createForm.get('Email')?.errors !== null && createForm.get('Email')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="text" placeholder="Phone number"
-            class="field-input"
-            formControlName="PhoneNumber" name="PhoneNumber"
-            [ngClass]="{'border-primary-red': createForm.get('PhoneNumber')?.errors !== null && createForm.get('PhoneNumber')?.touched}"
-            >
+            <input type="text" placeholder="Phone number" class="field-input" formControlName="PhoneNumber"
+              name="PhoneNumber"
+              [ngClass]="{'border-primary-red': createForm.get('PhoneNumber')?.errors !== null && createForm.get('PhoneNumber')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="number" placeholder="Price"
-            class="field-input"
-            formControlName="Price" name="Price"
-            [ngClass]="{'border-primary-red': createForm.get('Price')?.errors !== null && createForm.get('Price')?.touched}"
-            >
+            <input type="number" placeholder="Price" class="field-input" formControlName="Price" name="Price"
+              [ngClass]="{'border-primary-red': createForm.get('Price')?.errors !== null && createForm.get('Price')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="text" placeholder="Start time"
-            class="field-input"
-            formControlName="StartTime" name="StartTime"
-            [ngClass]="{'border-primary-red': createForm.get('StartTime')?.errors !== null && createForm.get('StartTime')?.touched}"
-            >
+            <input type="text" placeholder="Start time" class="field-input" formControlName="StartTime" name="StartTime"
+              [ngClass]="{'border-primary-red': createForm.get('StartTime')?.errors !== null && createForm.get('StartTime')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="text" placeholder="End time"
-            class="field-input"
-            formControlName="EndTime" name="EndTime"
-            [ngClass]="{'border-primary-red': createForm.get('EndTime')?.errors !== null && createForm.get('EndTime')?.touched}"
-            >
+            <input type="text" placeholder="End time" class="field-input" formControlName="EndTime" name="EndTime"
+              [ngClass]="{'border-primary-red': createForm.get('EndTime')?.errors !== null && createForm.get('EndTime')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="number" placeholder="Reservation period" min="1"
-            class="field-input"
-            formControlName="ReservationPeriod" name="ReservationPeriod"
-            [ngClass]="{'border-primary-red': createForm.get('ReservationPeriod')?.errors !== null && createForm.get('ReservationPeriod')?.touched}"
-            >
+            <input type="number" placeholder="Reservation period" min="1" class="field-input"
+              formControlName="ReservationPeriod" name="ReservationPeriod"
+              [ngClass]="{'border-primary-red': createForm.get('ReservationPeriod')?.errors !== null && createForm.get('ReservationPeriod')?.touched}">
           </fieldset>
           <fieldset class="col-span-1">
-            <input type="text" placeholder="Excluded days"
-            class="field-input"
-            formControlName="ExcludedDays" name="ExcludedDays"
-            [ngClass]="{'border-primary-red': createForm.get('ExcludedDays')?.errors !== null && createForm.get('ExcludedDays')?.touched}"
-            >
+            <input type="text" placeholder="Excluded days" class="field-input" formControlName="ExcludedDays"
+              name="ExcludedDays"
+              [ngClass]="{'border-primary-red': createForm.get('ExcludedDays')?.errors !== null && createForm.get('ExcludedDays')?.touched}">
           </fieldset>
           <fieldset class="col-span-2">
-            <input type="file" (change)="onFileSelected($event)"
-            class="field-input"
-            formControlName="Image" name="Image"
-            [ngClass]="{'border-primary-red': createForm.get('Image')?.errors !== null && createForm.get('Image')?.touched}"
-            >
+            <input type="file" (change)="onFileSelected($event)" class="field-input" formControlName="Image"
+              name="Image"
+              [ngClass]="{'border-primary-red': createForm.get('Image')?.errors !== null && createForm.get('Image')?.touched}">
           </fieldset>
-          <button type="submit"
-          class="col-span-2 rounded-md py-2 px-7 bg-primary text-white disabled:bg-primary-light"
-          [disabled]="createForm.invalid"
-          >Submit</button>
+          <button type="submit" class="col-span-2 rounded-md py-2 px-7 bg-primary text-white disabled:bg-primary-light"
+            [disabled]="createForm.invalid">Submit</button>
         </div>
       </form>
     </aside>
+    <div class="col-span-8">
+      <form class="w-[60%] mb-9 mx-auto" [formGroup]="getFieldForm"
+        (ngSubmit)="searchFields({searchText: getFieldForm.value.searchText, cityName: getFieldForm.value.cityName, pageNumber: 1})"
+      >
+        <div class="flex items-center border border-primary rounded-md overflow-hidden">
+          <fieldset class="flex-grow flex-shrink-0 border-r border-primary">
+            <input class="py-4 px-4 border-0 bg-transparent text-sm lg:text-base text-gray-dark-2 font-medium w-full"
+              formControlName="searchText" type="search" placeholder="Search For Fields">
+          </fieldset>
+          <fieldset *ngIf="cities$ | async as cities">
+            <select class="py-4 px-4 border-0 bg-transparent text-sm lg:text-base text-gray-dark-2 font-medium"
+              formControlName="cityName">
+              <option value="">Cities</option>
+              <ng-container *ngFor="let city of cities">
+                <option [value]="city.name">{{city.name}}</option>
+              </ng-container>
+            </select>
+          </fieldset>
+          <button class="py-4 px-5 text-sm lg:text-base text-white bg-primary" type="submit">
+            Search
+          </button>
+        </div>
+      </form>
+      <table class="w-full">
+        <thead class="w-full">
+          <tr class="border border-gray-light">
+            <th class="table__th-td text-primary font-bold"
+            >
+              ID</th>
+            <th class="table__th-td text-primary font-bold"
+            >
+              Field name</th>
+            <th class="table__th-td text-primary font-bold"
+            >
+              City</th>
+            <th class="table__th-td text-primary font-bold"
+            >
+              Image</th>
+            <th class="table__th-td text-primary font-bold"
+            >
+              Price</th>
+            <th class="table__th-td text-primary font-bold"
+            >
+              Action</th>
+          </tr>
+          <div class="mb-3"></div>
+        </thead>
+        <ng-container *ngIf="FieldsQueryed$ | async as fields">
+          <tbody *ngFor="let field of fields.items">
+            <tr>
+              <td class="table__th-td text-gray-dark"> {{field.id}} </td>
+              <td class="table__th-td text-gray-dark"> {{field.name}} </td>
+              <td class="table__th-td text-gray-dark"> {{field.cityName}} </td>
+              <td class="table__th-td text-gray-dark">
+                <div class="h-[50px] lg:h-[80px]">
+                  <img class="w-auto object-contain"
+                  [src]="field.image" alt="img" [title]="field.name">
+                </div>
+              </td>
+              <td class="table__th-td text-gray-dark"> {{field.price}} </td>
+              <td class="table__th-td text-gray-dark">
+                <button class="border border-primary-red rounded-md text-primary-red py-1 px-3 select-none"
+                (click)="onDelete(field.id, field.name)"
+                >
+                  Delete
+                </button>
+                <!-- <button class="action-btn">
+                  Edit
+                </button> -->
+              </td>
+            </tr>
+            <div class="mb-3"></div>
+          </tbody>
+        </ng-container>
+      </table>
+    </div>
   </div>
 </main>
